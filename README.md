@@ -4,7 +4,7 @@
 
 Upload a floor plan → AI detects fixture positions → drag markers to correct them → get a scored Vastu audit with remedies.
 
-🔗 **[Live Demo](https://your-onrender-url.onrender.com)** &nbsp;|&nbsp; Built with Gemini · FastAPI · Fabric.js
+🔗 **[Live Demo](https://vastulens.onrender.com/)** &nbsp;|&nbsp; Built with Gemini · FastAPI · Fabric.js
 
 ---
 
