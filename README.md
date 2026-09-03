@@ -11,7 +11,7 @@ Upload a floor plan → AI detects fixture positions → drag markers to correct
 ## What it does
 
 1. **Grid Overlay** — a 3×3 directional Vastu grid (NW → SE) is overlaid on your floor plan in memory
-2. **AI Detection** — Gemini Vision reads the grid and auto-places markers for fixtures (entrance, stove, toilet, bed, etc.) with x/y coordinates
+2. **AI Detection** — Gemini reads the grid and auto-places markers for fixtures (entrance, stove, toilet, bed, etc.) with x/y coordinates
 3. **Human Correction** — drag markers on the canvas or reassign labels from the sidebar if the AI misread anything
 4. **Vastu Audit** — a deterministic rule engine scores each fixture's zone placement (0–100) and returns findings with remedies
 
@@ -23,7 +23,7 @@ Upload a floor plan → AI detects fixture positions → drag markers to correct
 
 | Layer             | Tool              | Why                                                                                                 |
 | ----------------- | ----------------- | --------------------------------------------------------------------------------------------------- |
-| Vision extraction | Gemini Vision API | Only practical way to locate fixtures on arbitrary floor plan images without labelled training data |
+| Vision extraction | Gemini API        | Only practical way to locate fixtures on arbitrary floor plan images without labelled training data |
 | Scoring engine    | Pure Python rules | Deterministic, zero hallucination risk — AI handles perception, rules handle evaluation             |
 | Marker correction | Fabric.js canvas  | True drag-and-drop UX; keeps human in the loop for edge cases the LLM misreads                      |
 | Backend           | FastAPI           | Needed to serve the interactive HTML canvas frontend and handle multipart image uploads             |
@@ -37,7 +37,7 @@ root/
 ├── main.py               # FastAPI app — /api/analyze and /api/audit endpoints
 ├── src/
 │   ├── grid_lens.py      # Overlays 3×3 Vastu grid on floor plan image (in-memory, no disk writes)
-│   ├── detector.py       # Calls Gemini Vision, returns structured marker data
+│   ├── detector.py       # Calls Gemini, returns structured marker data
 │   ├── engine.py         # Deterministic Vastu rule engine, returns scored AuditResult
 │   └── utilities.py      # Pydantic schemas and Gemini prompt
 ├── static/
