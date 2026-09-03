@@ -14,8 +14,11 @@ from src.utilities import InteractiveMarker, ComplexFloorPlanExtraction, ZoneTyp
 
 app = FastAPI(title="Vastu Vision AI API")
 
-# Serve static frontend files
+# Serve frontend static files
 app.mount("/static", StaticFiles(directory="static"), name="static")
+
+# Serve sample floor plan images
+app.mount("/samples", StaticFiles(directory="samples"), name="samples")
 
 @app.get("/")
 async def serve_index():
