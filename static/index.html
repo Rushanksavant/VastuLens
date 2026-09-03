@@ -33,7 +33,6 @@
         --text-main: #f1f5f9;
         --text-muted: #94a3b8;
 
-        /* Specific UI Color Overrides */
         --color-studio-subtitle: #cbd5e1;
         --color-status-badge: #38bdf8;
         --color-status-success: #4ade80;
@@ -47,25 +46,40 @@
         font-family: 'Plus Jakarta Sans', sans-serif;
         min-height: 100vh;
         overflow-x: hidden;
+        font-size: 0.8125rem; /* 13px high-density scale */
       }
 
-      /* Top Navbar */
+      /* Navbar */
       .app-navbar {
         background-color: var(--bg-card);
         border-bottom: 1px solid var(--border-color);
-        padding: 0.8rem 1.5rem;
+        padding: 0.5rem 1.5rem;
+      }
+
+      .app-navbar-inner {
+        max-width: 1440px;
+        margin: 0 auto;
+        width: 100%;
       }
 
       .studio-subtitle {
         color: var(--color-studio-subtitle);
-        font-size: 0.85rem;
+        font-size: 0.7rem;
       }
 
-      /* High Visibility Badges */
+      /* Main Centered Layout Wrapper */
+      .app-wrapper {
+        max-width: 1440px;
+        margin: 0 auto;
+        padding: 1rem 1.5rem;
+      }
+
+      /* Badges */
       .status-badge-custom {
         color: var(--color-status-badge) !important;
         border-color: rgba(56, 189, 248, 0.4) !important;
         background-color: rgba(56, 189, 248, 0.1) !important;
+        font-size: 0.7rem;
       }
 
       .status-badge-success {
@@ -73,49 +87,43 @@
         border-color: rgba(74, 222, 128, 0.5) !important;
         background-color: rgba(74, 222, 128, 0.15) !important;
         font-weight: 600;
+        font-size: 0.7rem;
       }
 
-      /* Sidebar Controls */
+      /* Compact Sidebar Controls */
       .sidebar-panel {
-        background-color: var(--bg-card);
-        border-right: 1px solid var(--border-color);
-        min-height: calc(100vh - 65px);
         display: flex;
         flex-direction: column;
-        gap: 1.25rem;
-        padding: 1.25rem;
+        gap: 0.75rem;
+        padding-right: 1rem;
       }
 
       .section-card {
-        background-color: rgba(255, 255, 255, 0.02);
+        background-color: var(--bg-card);
         border: 1px solid var(--border-color);
-        border-radius: 12px;
-        padding: 1.25rem;
+        border-radius: 8px;
+        padding: 0.75rem;
         transition: border-color 0.2s ease;
       }
 
-      .section-card:focus-within {
-        border-color: var(--accent-indigo);
-      }
-
       .section-title {
-        font-size: 0.85rem;
+        font-size: 0.7rem;
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.05em;
         color: var(--accent-blue);
-        margin-bottom: 0.85rem;
+        margin-bottom: 0.5rem;
         display: flex;
         align-items: center;
-        gap: 0.5rem;
+        gap: 0.4rem;
       }
 
-      /* Sample Cards Styling */
+      /* Sample Cards */
       .sample-card {
         background: var(--bg-main);
         border: 1px solid var(--border-color);
-        border-radius: 8px;
-        padding: 6px;
+        border-radius: 6px;
+        padding: 4px;
         cursor: pointer;
         transition: all 0.2s ease;
         text-align: center;
@@ -129,36 +137,37 @@
       .sample-card.active {
         border-color: var(--accent-blue) !important;
         background: rgba(59, 130, 246, 0.15);
-        box-shadow: 0 0 8px rgba(59, 130, 246, 0.4);
+        box-shadow: 0 0 6px rgba(59, 130, 246, 0.4);
       }
 
       .sample-card img {
-        height: 50px;
+        height: 38px;
         width: 100%;
         object-fit: cover;
         border-radius: 4px;
       }
 
-      /* Canvas Workstation Header Text Colors */
+      /* Canvas Workstation Header */
       .grid-title-custom {
         color: var(--color-grid-title) !important;
         font-weight: 600;
+        font-size: 0.75rem;
       }
 
       .pixel-config-badge {
         color: var(--color-pixel-config) !important;
         border-color: rgba(245, 158, 11, 0.4) !important;
         background-color: rgba(245, 158, 11, 0.1) !important;
+        font-size: 0.65rem;
       }
 
-      /* Canvas Workstation */
       .viewport-header {
         background: var(--bg-card);
         border: 1px solid var(--border-color);
         border-bottom: none;
-        border-top-left-radius: 12px;
-        border-top-right-radius: 12px;
-        padding: 0.75rem 1.25rem;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        padding: 0.4rem 0.85rem;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -167,20 +176,20 @@
       .canvas-container-wrapper {
         background: #06090e;
         border: 1px solid var(--border-color);
-        border-bottom-left-radius: 12px;
-        border-bottom-right-radius: 12px;
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: 1.5rem;
-        min-height: 520px;
+        padding: 1.25rem;
+        min-height: 420px;
         box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.5);
       }
 
       /* Custom Scrollbars */
       ::-webkit-scrollbar {
-        width: 6px;
-        height: 6px;
+        width: 5px;
+        height: 5px;
       }
       ::-webkit-scrollbar-track {
         background: var(--bg-main);
@@ -190,9 +199,8 @@
         border-radius: 3px;
       }
 
-      /* Extended Marker Items List */
       #markersList {
-        max-height: 380px;
+        max-height: 240px;
         overflow-y: auto;
         padding-right: 4px;
       }
@@ -200,9 +208,9 @@
       .marker-item {
         background: var(--bg-main);
         border: 1px solid var(--border-color);
-        border-radius: 8px;
-        padding: 0.75rem;
-        margin-bottom: 0.6rem;
+        border-radius: 6px;
+        padding: 0.4rem 0.5rem;
+        margin-bottom: 0.4rem;
         transition: all 0.2s ease;
       }
 
@@ -215,19 +223,19 @@
       .report-card {
         background: var(--bg-card);
         border: 1px solid var(--border-color);
-        border-radius: 12px;
-        padding: 1.5rem;
+        border-radius: 8px;
+        padding: 1rem;
       }
 
       .metric-box {
         background: var(--bg-main);
         border: 1px solid var(--border-color);
-        border-radius: 10px;
-        padding: 1.25rem;
+        border-radius: 6px;
+        padding: 0.75rem;
         text-align: center;
       }
 
-      /* Badge Themes */
+      /* Badges */
       .badge-PASS {
         background-color: rgba(34, 197, 94, 0.2);
         color: #4ade80;
@@ -258,37 +266,41 @@
         border: none;
         color: white;
         font-weight: 600;
-        box-shadow: 0 4px 14px rgba(99, 102, 241, 0.35);
+        box-shadow: 0 3px 10px rgba(99, 102, 241, 0.3);
         transition: all 0.2s ease;
       }
 
       .btn-glow:hover {
         transform: translateY(-1px);
-        box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
+        box-shadow: 0 5px 15px rgba(99, 102, 241, 0.45);
         color: white;
       }
     </style>
   </head>
   <body>
     <!-- Navbar -->
-    <header
-      class="app-navbar d-flex justify-content-between align-items-center"
-    >
-      <div class="d-flex align-items-center">
+    <header class="app-navbar">
+      <div
+        class="app-navbar-inner d-flex justify-content-between align-items-center"
+      >
         <div>
-          <h5 class="m-0 fw-bold text-white">VastuLens</h5>
+          <h6 class="m-0 fw-bold text-white">VastuLens</h6>
           <span class="studio-subtitle"
             >Interactive Floor Plan Spatial Studio</span
           >
         </div>
-      </div>
-      <div id="statusBadge" class="badge status-badge-custom border px-3 py-2">
-        <i class="fa-solid fa-circle-dot me-1"></i> Ready for Upload
+        <div
+          id="statusBadge"
+          class="badge status-badge-custom border px-2 py-1"
+        >
+          <i class="fa-solid fa-circle-dot me-1"></i> Ready for Upload
+        </div>
       </div>
     </header>
 
-    <div class="container-fluid p-0">
-      <div class="row g-0">
+    <!-- Main Dashboard Container -->
+    <main class="app-wrapper">
+      <div class="row g-3">
         <!-- Left Control Sidebar -->
         <div class="col-lg-3 sidebar-panel">
           <!-- Step 1: Upload Module -->
@@ -304,25 +316,27 @@
               accept="image/*"
             />
 
-            <!-- File Name Display Indicator -->
             <div
               id="fileNameDisplay"
               class="small text-info mb-2 fw-semibold truncate"
-              style="font-size: 0.8rem"
+              style="font-size: 0.7rem"
             >
               No file selected
             </div>
 
-            <button id="analyzeBtn" class="btn btn-glow btn-sm w-100 mb-3">
+            <button
+              id="analyzeBtn"
+              class="btn btn-glow btn-sm w-100 mb-2"
+              style="font-size: 0.75rem"
+            >
               <i class="fa-solid fa-wand-magic-sparkles me-1"></i> Extract
               Layout with AI
             </button>
 
-            <!-- Sample Input Presets Container -->
             <div>
               <label
-                class="text-muted small fw-bold uppercase mb-2 block"
-                style="font-size: 0.75rem; letter-spacing: 0.05em"
+                class="text-muted small fw-bold uppercase mb-1 d-block"
+                style="font-size: 0.6rem; letter-spacing: 0.05em"
               >
                 OR CHOOSE A SAMPLE FLOOR PLAN
               </label>
@@ -400,12 +414,12 @@
           <div
             id="studioPanel"
             style="display: none"
-            class="d-flex flex-column gap-3"
+            class="d-flex flex-column gap-2"
           >
             <!-- Step 2: Marker Layer Management -->
             <div class="section-card">
               <div
-                class="d-flex justify-content-between align-items-center mb-2"
+                class="d-flex justify-content-between align-items-center mb-1"
               >
                 <div class="section-title m-0">
                   <i class="fa-solid fa-location-dot"></i> Step 2: Spatial Pins
@@ -413,32 +427,37 @@
                 <button
                   id="addMarkerBtn"
                   class="btn btn-xs btn-outline-success py-0 px-2"
-                  style="font-size: 0.75rem"
+                  style="font-size: 0.65rem"
                 >
                   <i class="fa-solid fa-plus me-1"></i> Add Pin
                 </button>
               </div>
-              <p class="text-muted small mb-2">
-                Drag pins on the canvas to adjust positioning.
+              <p class="text-muted small mb-2" style="font-size: 0.68rem">
+                Drag pins on canvas or click trash to remove.
               </p>
               <div id="markersList"></div>
             </div>
 
-            <!-- Read-only AI Detected Brahmasthan Zone -->
+            <!-- AI Detected Brahmasthan Zone -->
             <div class="section-card">
               <div class="section-title">
                 <i class="fa-solid fa-robot"></i> AI Brahmasthan Status
               </div>
               <div
                 id="brahmasthanDisplay"
-                class="p-2 rounded bg-dark border border-secondary text-center font-monospace text-info small fw-bold"
+                class="p-1 rounded bg-dark border border-secondary text-center font-monospace text-info small fw-bold"
+                style="font-size: 0.7rem"
               >
                 Awaiting Detection...
               </div>
             </div>
 
             <!-- Step 3: Run Audit Action -->
-            <button id="auditBtn" class="btn btn-success fw-bold py-2 shadow">
+            <button
+              id="auditBtn"
+              class="btn btn-success btn-sm fw-bold py-2 shadow"
+              style="font-size: 0.75rem"
+            >
               <i class="fa-solid fa-chart-pie me-1"></i> Execute Vastu
               Compliance Audit
             </button>
@@ -446,93 +465,101 @@
         </div>
 
         <!-- Right Workspace Area -->
-        <div
-          class="col-lg-9 p-4 overflow-auto"
-          style="max-height: calc(100vh - 65px)"
-        >
+        <div class="col-lg-9">
           <!-- Canvas Viewport -->
           <div class="viewport-header">
-            <span class="small grid-title-custom">
+            <span class="grid-title-custom">
               <i class="fa-solid fa-vector-square me-1"></i> Interactive Grid
-              Studio
+              Studio (North Up)
             </span>
             <span id="canvasDimensions" class="badge pixel-config-badge border"
               >0 × 0 px</span
             >
           </div>
-          <div class="canvas-container-wrapper mb-4">
+          <div class="canvas-container-wrapper mb-3">
             <canvas id="vastuCanvas"></canvas>
           </div>
 
           <!-- Audit Report Section -->
           <div id="reportSection" style="display: none" class="report-card">
-            <div class="d-flex justify-content-between align-items-center mb-4">
-              <h5 class="m-0 fw-bold text-warning">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <h6 class="m-0 fw-bold text-warning" style="font-size: 0.85rem">
                 <i class="fa-solid fa-clipboard-check me-2"></i> Vastu
                 Compliance Assessment Report
-              </h5>
-              <span class="small text-muted"
+              </h6>
+              <span class="small text-muted" style="font-size: 0.68rem"
                 >Deterministic Rule Engine Output</span
               >
             </div>
 
             <!-- Metrics Overview Row -->
-            <div class="row g-3 mb-4">
+            <div class="row g-2 mb-3">
               <div class="col-md-4">
                 <div class="metric-box">
-                  <span class="text-muted small fw-semibold"
+                  <span
+                    class="text-muted small fw-semibold d-block"
+                    style="font-size: 0.65rem"
                     >COMPLIANCE SCORE</span
                   >
-                  <h2 id="scoreMetric" class="m-0 mt-1 fw-bold text-success">
+                  <h4 id="scoreMetric" class="m-0 mt-1 fw-bold text-success">
                     0 / 100
-                  </h2>
+                  </h4>
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="metric-box">
-                  <span class="text-muted small fw-semibold"
+                  <span
+                    class="text-muted small fw-semibold d-block"
+                    style="font-size: 0.65rem"
                     >TOTAL PENALTY</span
                   >
-                  <h2 id="penaltyMetric" class="m-0 mt-1 fw-bold text-danger">
+                  <h4 id="penaltyMetric" class="m-0 mt-1 fw-bold text-danger">
                     0 pts
-                  </h2>
+                  </h4>
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="metric-box">
-                  <span class="text-muted small fw-semibold"
+                  <span
+                    class="text-muted small fw-semibold d-block"
+                    style="font-size: 0.65rem"
                     >LAYOUT RATING</span
                   >
-                  <h2 id="statusMetric" class="m-0 mt-1 fw-bold text-info">
+                  <h4 id="statusMetric" class="m-0 mt-1 fw-bold text-info">
                     --
-                  </h2>
+                  </h4>
                 </div>
               </div>
             </div>
 
             <!-- Detailed Findings Table -->
-            <h6 class="fw-semibold mb-3">Audit Findings & Remedial Action</h6>
+            <h6 class="fw-semibold mb-2" style="font-size: 0.75rem">
+              Audit Findings & Remedial Action
+            </h6>
             <div class="table-responsive">
               <table
-                class="table table-dark table-hover align-middle border-secondary"
+                class="table table-dark table-hover align-middle border-secondary mb-0"
               >
-                <thead class="table-dark text-muted small">
+                <thead
+                  class="table-dark text-muted small"
+                  style="font-size: 0.68rem"
+                >
                   <tr>
                     <th>SEVERITY</th>
                     <th>ELEMENT</th>
-                    <th>VASTU ZONE</th>
+                    <th>ZONE</th>
                     <th>IMPACT</th>
-                    <th>FINDING DESCRIPTION</th>
-                    <th>RECOMMENDED REMEDY</th>
+                    <th>DESCRIPTION</th>
+                    <th>REMEDY</th>
                   </tr>
                 </thead>
-                <tbody id="findingsTableBody" class="small"></tbody>
+                <tbody id="findingsTableBody" style="font-size: 0.7rem"></tbody>
               </table>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </main>
 
     <script>
       let canvas = new fabric.Canvas('vastuCanvas');
@@ -597,8 +624,8 @@
             : 'image/jpeg';
           activeUploadFile = new File([blob], filename, { type: mimeType });
 
-          updateFileNameDisplay(`Sample ${filename}`);
-          document.getElementById('imageInput').value = ''; // Reset file input element
+          updateFileNameDisplay(`Sample: ${filename}`);
+          document.getElementById('imageInput').value = '';
         } catch (err) {
           alert('Failed to load sample image.');
           console.error(err);
@@ -633,7 +660,7 @@
 
           const analyzeBtn = document.getElementById('analyzeBtn');
           analyzeBtn.disabled = true;
-          analyzeBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin me-1"></i> Extracting Layout...`;
+          analyzeBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin me-1"></i> Extracting...`;
 
           const formData = new FormData();
           formData.append('file', fileToProcess);
@@ -651,16 +678,14 @@
               ...m,
             }));
 
-            // Display AI Detected Brahmasthan status automatically
             const brahmasthanStatus =
               currentExtractionData.brahmasthan_status || 'CLEAR';
             document.getElementById('brahmasthanDisplay').innerText =
               brahmasthanStatus.replace(/_/g, ' ');
 
-            // Load background image onto Canvas
             fabric.Image.fromURL(data.image_url, (img) => {
               canvas.clear();
-              const maxDim = 700;
+              const maxDim = 550; // Constrained canvas size
               const scale = Math.min(maxDim / img.width, maxDim / img.height);
 
               const canvasW = Math.round(img.width * scale);
@@ -679,10 +704,8 @@
               renderSidebarList();
 
               document.getElementById('studioPanel').style.display = 'flex';
-
-              // High visibility bright green status badge update
               document.getElementById('statusBadge').className =
-                'badge status-badge-success border px-3 py-2';
+                'badge status-badge-success border px-2 py-1';
               document.getElementById(
                 'statusBadge',
               ).innerHTML = `<i class="fa-solid fa-circle-check me-1"></i> Layout Extracted`;
@@ -695,7 +718,7 @@
           }
         });
 
-      // Render Markers with Large 20px Readable Font Size
+      // Render Markers on Fabric Canvas
       function renderMarkersOnCanvas() {
         Object.values(fabricMarkers).forEach((obj) => canvas.remove(obj));
         fabricMarkers = {};
@@ -706,7 +729,7 @@
           const yPx = (m.y_percent / 100) * canvas.height;
 
           const circle = new fabric.Circle({
-            radius: 12,
+            radius: 9,
             fill: color,
             stroke: '#FFFFFF',
             strokeWidth: 2,
@@ -714,19 +737,18 @@
             originY: 'center',
           });
 
-          // Increased font size to 20px with sharp black drop-shadow
           const text = new fabric.Text(`${m.id}: ${m.label}`, {
-            fontSize: 20,
+            fontSize: 14,
             fontWeight: 'bold',
             fill: '#FFE600',
             shadow: new fabric.Shadow({
               color: 'rgba(0,0,0,0.95)',
-              blur: 8,
+              blur: 6,
               offsetX: 2,
               offsetY: 2,
             }),
-            left: 20,
-            top: -11,
+            left: 14,
+            top: -8,
           });
 
           const group = new fabric.Group([circle, text], {
@@ -761,7 +783,7 @@
         canvas.renderAll();
       }
 
-      // Render Sidebar Marker Controls
+      // Render Sidebar Controls with Delete Button
       function renderSidebarList() {
         const list = document.getElementById('markersList');
         list.innerHTML = '';
@@ -771,12 +793,23 @@
           div.className = 'marker-item';
           div.innerHTML = `
         <div class="d-flex justify-content-between align-items-center mb-1">
-          <span class="fw-bold small text-white">${m.id}</span>
-          <span id="zone-badge-${m.id}" class="badge bg-primary opacity-90">${
+          <span class="fw-bold small text-white" style="font-size: 0.7rem;">${
+            m.id
+          }</span>
+          <div class="d-flex align-items-center gap-1">
+            <span id="zone-badge-${
+              m.id
+            }" class="badge bg-primary opacity-90" style="font-size: 0.6rem;">${
             m.zone
           }</span>
+            <button class="btn btn-xs btn-outline-danger py-0 px-1 border-0" onclick="deleteMarker('${
+              m.id
+            }')" title="Delete Marker">
+              <i class="fa-solid fa-trash-can" style="font-size: 0.65rem;"></i>
+            </button>
+          </div>
         </div>
-        <select class="form-select form-select-sm bg-dark text-white border-secondary" onchange="updateMarkerLabel('${
+        <select class="form-select form-select-sm bg-dark text-white border-secondary py-0" style="font-size: 0.68rem; height: 24px;" onchange="updateMarkerLabel('${
           m.id
         }', this.value)">
           ${VALID_LABELS.map(
@@ -789,6 +822,17 @@
       `;
           list.appendChild(div);
         });
+      }
+
+      // Delete Marker Function
+      function deleteMarker(id) {
+        markers = markers.filter((m) => m.id !== id);
+        if (fabricMarkers[id]) {
+          canvas.remove(fabricMarkers[id]);
+          delete fabricMarkers[id];
+        }
+        renderMarkersOnCanvas();
+        renderSidebarList();
       }
 
       function updateMarkerLabel(id, newLabel) {
@@ -814,7 +858,7 @@
         renderSidebarList();
       });
 
-      // Run Vastu Audit API Call
+      // Run Vastu Audit
       document
         .getElementById('auditBtn')
         .addEventListener('click', async () => {
