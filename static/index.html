@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>VastuLens Studio</title>
-
     <!-- Fabric.js CDN for canvas interactivity -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js"></script>
     <!-- Bootstrap 5 CSS -->
@@ -109,6 +108,35 @@
         display: flex;
         align-items: center;
         gap: 0.5rem;
+      }
+
+      /* Sample Cards Styling */
+      .sample-card {
+        background: var(--bg-main);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 6px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        text-align: center;
+      }
+
+      .sample-card:hover {
+        border-color: var(--accent-blue);
+        background: var(--bg-card-hover);
+      }
+
+      .sample-card.active {
+        border-color: var(--accent-blue) !important;
+        background: rgba(59, 130, 246, 0.15);
+        box-shadow: 0 0 8px rgba(59, 130, 246, 0.4);
+      }
+
+      .sample-card img {
+        height: 50px;
+        width: 100%;
+        object-fit: cover;
+        border-radius: 4px;
       }
 
       /* Canvas Workstation Header Text Colors */
@@ -275,10 +303,97 @@
               class="form-control bg-dark text-white border-secondary form-control-sm mb-2"
               accept="image/*"
             />
-            <button id="analyzeBtn" class="btn btn-glow btn-sm w-100">
+
+            <!-- File Name Display Indicator -->
+            <div
+              id="fileNameDisplay"
+              class="small text-info mb-2 fw-semibold truncate"
+              style="font-size: 0.8rem"
+            >
+              No file selected
+            </div>
+
+            <button id="analyzeBtn" class="btn btn-glow btn-sm w-100 mb-3">
               <i class="fa-solid fa-wand-magic-sparkles me-1"></i> Extract
               Layout with AI
             </button>
+
+            <!-- Sample Input Presets Container -->
+            <div>
+              <label
+                class="text-muted small fw-bold uppercase mb-2 block"
+                style="font-size: 0.75rem; letter-spacing: 0.05em"
+              >
+                OR CHOOSE A SAMPLE FLOOR PLAN
+              </label>
+              <div class="row g-2">
+                <div class="col-4">
+                  <div
+                    class="sample-card"
+                    onclick="selectSample('/samples/plan1.jpg', 'floor-plan 1', this)"
+                  >
+                    <img src="/samples/plan1.jpg" alt="Sample 1" />
+                    <span
+                      class="small text-white d-block text-truncate mt-1"
+                      style="font-size: 0.7rem"
+                      >Floor Plan-1</span
+                    >
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div
+                    class="sample-card"
+                    onclick="selectSample('/samples/plan2.jpg', 'floor-plan 2', this)"
+                  >
+                    <img src="/samples/plan2.jpg" alt="Sample 2" />
+                    <span
+                      class="small text-white d-block text-truncate mt-1"
+                      style="font-size: 0.7rem"
+                      >Floor Plan-2</span
+                    >
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div
+                    class="sample-card"
+                    onclick="selectSample('/samples/plan3.jpg', 'floor plan 3', this)"
+                  >
+                    <img src="/samples/plan4.jpg" alt="Sample 3" />
+                    <span
+                      class="small text-white d-block text-truncate mt-1"
+                      style="font-size: 0.7rem"
+                      >Floor Plan-3</span
+                    >
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div
+                    class="sample-card"
+                    onclick="selectSample('/samples/plan4.jpg', 'floor-plan 4', this)"
+                  >
+                    <img src="/samples/plan4.jpg" alt="Sample 4" />
+                    <span
+                      class="small text-white d-block text-truncate mt-1"
+                      style="font-size: 0.7rem"
+                      >Floor Plan-4</span
+                    >
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div
+                    class="sample-card"
+                    onclick="selectSample('/samples/plan5.png', 'floor-plan 5', this)"
+                  >
+                    <img src="/samples/plan5.png" alt="Sample 5" />
+                    <span
+                      class="small text-white d-block text-truncate mt-1"
+                      style="font-size: 0.7rem"
+                      >Floor Plan-5</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
           <!-- Studio Workflow Panel -->
@@ -365,7 +480,7 @@
             <div class="row g-3 mb-4">
               <div class="col-md-4">
                 <div class="metric-box">
-                  <span class="text-white small fw-semibold"
+                  <span class="text-muted small fw-semibold"
                     >COMPLIANCE SCORE</span
                   >
                   <h2 id="scoreMetric" class="m-0 mt-1 fw-bold text-success">
@@ -375,7 +490,7 @@
               </div>
               <div class="col-md-4">
                 <div class="metric-box">
-                  <span class="text-white small fw-semibold"
+                  <span class="text-muted small fw-semibold"
                     >TOTAL PENALTY</span
                   >
                   <h2 id="penaltyMetric" class="m-0 mt-1 fw-bold text-danger">
@@ -385,7 +500,7 @@
               </div>
               <div class="col-md-4">
                 <div class="metric-box">
-                  <span class="text-white small fw-semibold"
+                  <span class="text-muted small fw-semibold"
                     >LAYOUT RATING</span
                   >
                   <h2 id="statusMetric" class="m-0 mt-1 fw-bold text-info">
@@ -424,6 +539,7 @@
       let currentExtractionData = null;
       let markers = [];
       let fabricMarkers = {};
+      let activeUploadFile = null;
 
       const COLOR_MAP = {
         MAIN_ENTRANCE: '#00E676',
@@ -458,20 +574,69 @@
         return matrix[row][col];
       }
 
+      // Handle Manual File Input Change
+      document.getElementById('imageInput').addEventListener('change', (e) => {
+        if (e.target.files.length > 0) {
+          activeUploadFile = e.target.files[0];
+          updateFileNameDisplay(activeUploadFile.name);
+          clearSampleHighlights();
+        }
+      });
+
+      // Handle Sample Selection
+      async function selectSample(imagePath, filename, element) {
+        try {
+          clearSampleHighlights();
+          element.classList.add('active');
+
+          const response = await fetch(imagePath);
+          const blob = await response.blob();
+
+          const mimeType = filename.endsWith('.png')
+            ? 'image/png'
+            : 'image/jpeg';
+          activeUploadFile = new File([blob], filename, { type: mimeType });
+
+          updateFileNameDisplay(`Sample ${filename}`);
+          document.getElementById('imageInput').value = ''; // Reset file input element
+        } catch (err) {
+          alert('Failed to load sample image.');
+          console.error(err);
+        }
+      }
+
+      function updateFileNameDisplay(name) {
+        document.getElementById(
+          'fileNameDisplay',
+        ).innerText = `Selected: ${name}`;
+      }
+
+      function clearSampleHighlights() {
+        document
+          .querySelectorAll('.sample-card')
+          .forEach((card) => card.classList.remove('active'));
+      }
+
       // Upload and Process Image
       document
         .getElementById('analyzeBtn')
         .addEventListener('click', async () => {
           const fileInput = document.getElementById('imageInput');
-          if (!fileInput.files[0])
-            return alert('Please select an image file first.');
+          const fileToProcess =
+            activeUploadFile ||
+            (fileInput.files.length > 0 ? fileInput.files[0] : null);
+
+          if (!fileToProcess)
+            return alert(
+              'Please select a sample or upload a floor plan image first.',
+            );
 
           const analyzeBtn = document.getElementById('analyzeBtn');
           analyzeBtn.disabled = true;
-          analyzeBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin me-1"></i> Analyzing...`;
+          analyzeBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin me-1"></i> Extracting Layout...`;
 
           const formData = new FormData();
-          formData.append('file', fileInput.files[0]);
+          formData.append('file', fileToProcess);
 
           try {
             const res = await fetch('/api/analyze', {
@@ -549,7 +714,7 @@
             originY: 'center',
           });
 
-          // Increased font size to 20px with sharp black outer drop-shadow
+          // Increased font size to 20px with sharp black drop-shadow
           const text = new fabric.Text(`${m.id}: ${m.label}`, {
             fontSize: 20,
             fontWeight: 'bold',
